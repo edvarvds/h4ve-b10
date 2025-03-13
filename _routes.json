@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/assets/*",
+    "/*.css",
+    "/*.js",
+    "/*.webp",
+    "/*.jpg",
+    "/*.png",
+    "/*.svg",
+    "/*.ico"
+  ],
+  "routes": [
+    {
+      "src": "/Conheça os melhores tecidos leves pro verão - Blog Havan_files/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": ".*",
+      "dest": "/index.html"
+    }
+  ]
+} 

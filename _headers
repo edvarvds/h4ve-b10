@@ -1,0 +1,17 @@
+# Configurações globais
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer-when-downgrade
+
+# Configurações específicas para CSS
+*.css
+  Content-Type: text/css
+
+# Configurações específicas para JavaScript
+*.js
+  Content-Type: application/javascript
+
+# Configurações específicas para imagens WebP
+*.webp
+  Content-Type: image/webp 

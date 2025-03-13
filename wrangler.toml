@@ -6,11 +6,11 @@ compatibility_date = "2023-12-01"
 bucket = "./"
 entry-point = "."
 
-# Build configuration
+# Build configuration - Alterado para não usar npm run start, já que o Cloudflare Pages é para sites estáticos
 [build]
-command = "npm run start"
+command = "" # Deixando vazio para não executar nenhum comando de build
 upload.format = "directory"
-output_directory = "public_html"
+output_directory = "." # Usando o diretório raiz para servir todos os arquivos
 
 # Environment variables
 [env.production]
@@ -19,15 +19,41 @@ NODE_ENV = "production"
 [env.preview]
 NODE_ENV = "development"
 
-# Specify routes or redirects if needed
-# [[routes]]
-# pattern = "/api/*"
-# script = "server.js"
+# Configuração de rotas para simular o comportamento do Express
+[[routes]]
+pattern = "/Conheça os melhores tecidos leves pro verão - Blog Havan_files/*"
+path_rewrite = "/assets/:splat"
+
+# Rota para servir o index.html para todas as rotas não encontradas (SPA fallback)
+[[routes]]
+pattern = "/*"
+fallback_service = "index.html"
+
+# Configurações de tipos de conteúdo para garantir que os arquivos sejam servidos corretamente
+[[headers]]
+pattern = "*.css"
+[headers.content_type]
+value = "text/css"
+
+[[headers]]
+pattern = "*.js"
+[headers.content_type]
+value = "application/javascript"
+
+[[headers]]
+pattern = "*.webp"
+[headers.content_type]
+value = "image/webp"
+
+# Specify any required compatibility flags
+[compatibility_flags]
+nodejs_compat = false # Alterado para false já que não estamos usando Node.js no Cloudflare Pages
 
 # Add any necessary KV namespaces, Durable Objects, or other bindings
 # [kv_namespaces]
 # MY_KV = { binding = "MY_KV", id = "xxx" }
 
-# Specify any required compatibility flags
-[compatibility_flags]
-nodejs_compat = true 
+# Specify routes or redirects if needed
+# [[routes]]
+# pattern = "/api/*"
+# script = "server.js" 
