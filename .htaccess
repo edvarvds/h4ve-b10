@@ -1,0 +1,26 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Handle special characters in URLs
+<IfModule mod_rewrite.c>
+  Options +FollowSymLinks
+  RewriteEngine On
+  
+  # Redirect requests for files with spaces to the assets folder
+  RewriteCond %{REQUEST_URI} ^/Conhe%C3%A7a%20os%20melhores%20tecidos%20leves%20pro%20ver%C3%A3o%20-%20Blog%20Havan_files/(.*)$
+  RewriteRule ^Conhe%C3%A7a%20os%20melhores%20tecidos%20leves%20pro%20ver%C3%A3o%20-%20Blog%20Havan_files/(.*)$ /assets/$1 [L]
+</IfModule>
+
+# Set proper MIME types
+<IfModule mod_mime.c>
+  AddType text/css .css
+  AddType application/javascript .js
+  AddType image/webp .webp
+</IfModule>
+
+# Enable CORS
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+</IfModule> 
