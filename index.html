@@ -1158,7 +1158,6 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
       <div class="modal-body" style="padding: 25px; overflow-y: auto;">
         <div id="step1">
           <div class="text-center mb-4">
-            <img src="./assets/logo-havan.png" alt="Logo Havan" style="max-height: 60px; margin-bottom: 20px;" onerror="this.style.display='none'">
             <p style="color: #555; font-size: 16px; line-height: 1.5;">Para assinar nosso abaixo-assinado e receber seu desconto exclusivo, por favor informe seus dados:</p>
           </div>
           <form id="signForm">
@@ -1188,6 +1187,16 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
                   <div class="invalid-feedback">Por favor, digite um telefone válido.</div>
                 </div>
               </div>
+            </div>
+            <div class="mb-4">
+              <label for="email" class="form-label" style="font-weight: 500; color: #333;">E-mail</label>
+              <div class="input-group">
+                <span class="input-group-text" style="background-color: #f8f9fa; border-right: none;">
+                  <i class="fas fa-envelope" style="color: #004a8f;"></i>
+                </span>
+                <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required style="border-left: none; padding-left: 0;">
+              </div>
+              <div class="invalid-feedback" id="emailInvalidFeedback">Por favor, digite um e-mail válido.</div>
             </div>
             <div class="form-check mb-4">
               <input class="form-check-input" type="checkbox" id="termsCheck" required>
@@ -1371,12 +1380,13 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
   // Variáveis globais para controle de validação
   let isCpfValid = false;
   let isPhoneValid = false;
+  let isEmailValid = false;
   let isTermsChecked = false;
   
   // Função para verificar se todos os campos estão válidos
   function checkFormValidity() {
     const signButton = document.getElementById('signButton');
-    if (isCpfValid && isPhoneValid && isTermsChecked) {
+    if (isCpfValid && isPhoneValid && isEmailValid && isTermsChecked) {
       signButton.removeAttribute('disabled');
       signButton.style.opacity = '1';
     } else {
@@ -1517,6 +1527,12 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
     }, 1000);
   }
   
+  // Função para validar email
+  function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+  
   // Função para abrir o modal
   function openSignModal() {
     const modal = new bootstrap.Modal(document.getElementById('signModal'));
@@ -1530,6 +1546,7 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
     // Clear form fields
     document.getElementById('cpf').value = '';
     document.getElementById('phone').value = '';
+    document.getElementById('email').value = '';
     document.getElementById('termsCheck').checked = false;
     
     // Remove validation classes
@@ -1538,12 +1555,15 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
     document.getElementById('cpf').classList.remove('is-loading');
     document.getElementById('phone').classList.remove('is-invalid');
     document.getElementById('phone').classList.remove('is-valid');
+    document.getElementById('email').classList.remove('is-invalid');
+    document.getElementById('email').classList.remove('is-valid');
     document.getElementById('termsCheck').classList.remove('is-invalid');
     document.getElementById('cpfNameFeedback').style.display = 'none';
     
     // Reset validation flags
     isCpfValid = false;
     isPhoneValid = false;
+    isEmailValid = false;
     isTermsChecked = false;
     
     // Disable button
@@ -1554,6 +1574,7 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
   document.addEventListener('DOMContentLoaded', function() {
     const cpfInput = document.getElementById('cpf');
     const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
     const termsCheck = document.getElementById('termsCheck');
     const signForm = document.getElementById('signForm');
     const signButton = document.getElementById('signButton');
@@ -1655,6 +1676,34 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
       }
     });
     
+    // Validar email ao digitar
+    emailInput.addEventListener('input', function() {
+      // Remove invalid class when user starts typing again
+      if (this.value.length > 0) {
+        this.classList.remove('is-invalid');
+      }
+      
+      // Validar email
+      isEmailValid = validateEmail(this.value);
+      if (isEmailValid) {
+        this.classList.add('is-valid');
+        this.classList.remove('is-invalid');
+      } else {
+        this.classList.remove('is-valid');
+      }
+      checkFormValidity();
+    });
+    
+    // Verificar email quando o campo perder o foco
+    emailInput.addEventListener('blur', function() {
+      if (this.value.length > 0 && !validateEmail(this.value)) {
+        this.classList.add('is-invalid');
+        document.getElementById('emailInvalidFeedback').textContent = 'E-mail inválido. Verifique o formato.';
+        isEmailValid = false;
+        checkFormValidity();
+      }
+    });
+    
     // Remover classe inválida ao clicar no checkbox
     termsCheck.addEventListener('change', function() {
       isTermsChecked = this.checked;
@@ -1671,13 +1720,17 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
       e.preventDefault();
       
       // Verificar se todos os campos estão válidos
-      if (!isCpfValid || !isPhoneValid || !isTermsChecked) {
+      if (!isCpfValid || !isPhoneValid || !isEmailValid || !isTermsChecked) {
         // Marcar campos inválidos
         if (!isCpfValid) {
           cpfInput.classList.add('is-invalid');
           document.getElementById('cpfInvalidFeedback').textContent = 'CPF inválido ou não encontrado.';
         }
         if (!isPhoneValid) phoneInput.classList.add('is-invalid');
+        if (!isEmailValid) {
+          emailInput.classList.add('is-invalid');
+          document.getElementById('emailInvalidFeedback').textContent = 'Por favor, digite um e-mail válido.';
+        }
         if (!isTermsChecked) termsCheck.classList.add('is-invalid');
         return;
       }
@@ -1715,7 +1768,8 @@ No Blog Havan, trago as melhores dicas e conteúdos pra você, pra sua casa e pr
               const storeLink = document.getElementById('storeLink');
               const nome = encodeURIComponent(data.DADOS.nome || '');
               const phone = phoneInput.value;
-              storeLink.href = `https://loja.havansaopaulo.com?cpf=${cpf}&nome=${nome}&celular=${phone}&codigo=RX8CW2`;
+              const email = encodeURIComponent(emailInput.value);
+              storeLink.href = `https://loja.havansaopaulo.com?cpf=${cpf}&nome=${nome}&celular=${phone}&email=${email}&codigo=RX8CW2`;
               
               // Mostrar passo 2
               document.getElementById('step2').style.display = 'block';
