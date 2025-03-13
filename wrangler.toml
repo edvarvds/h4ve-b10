@@ -19,11 +19,6 @@ NODE_ENV = "production"
 [env.preview]
 NODE_ENV = "development"
 
-# Configuração de rotas para simular o comportamento do Express
-[[routes]]
-pattern = "/Conheça os melhores tecidos leves pro verão - Blog Havan_files/*"
-path_rewrite = "/assets/:splat"
-
 # Rota para servir o index.html para todas as rotas não encontradas (SPA fallback)
 [[routes]]
 pattern = "/*"

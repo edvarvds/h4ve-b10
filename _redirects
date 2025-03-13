@@ -1,5 +1,2 @@
-# Redireciona a pasta com nome especial para a pasta assets
-/Conheça\ os\ melhores\ tecidos\ leves\ pro\ verão\ -\ Blog\ Havan_files/* /assets/:splat 200
-
-# Redireciona todas as outras rotas para o index.html (comportamento SPA)
+# Redireciona todas as rotas para o index.html (comportamento SPA)
 /* /index.html 200 

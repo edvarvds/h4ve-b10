@@ -13,10 +13,6 @@
   ],
   "routes": [
     {
-      "src": "/Conheça os melhores tecidos leves pro verão - Blog Havan_files/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
       "src": ".*",
       "dest": "/index.html"
     }
