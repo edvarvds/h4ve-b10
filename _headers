@@ -1,17 +1,27 @@
 # Configurações globais
 /*
-  X-Frame-Options: DENY
+  X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer-when-downgrade
+  X-XSS-Protection: 1; mode=block
+  Cache-Control: public, max-age=3600
 
 # Configurações específicas para CSS
 *.css
   Content-Type: text/css
+  Cache-Control: public, max-age=86400
 
 # Configurações específicas para JavaScript
 *.js
   Content-Type: application/javascript
+  Cache-Control: public, max-age=86400
 
 # Configurações específicas para imagens WebP
 *.webp
-  Content-Type: image/webp 
+  Content-Type: image/webp
+  Cache-Control: public, max-age=86400
+
+# Configurações específicas para HTML
+*.html
+  Content-Type: text/html; charset=UTF-8
+  Cache-Control: no-cache 

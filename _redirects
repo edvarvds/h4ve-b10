@@ -1,2 +1,8 @@
-# Redireciona todas as rotas para o index.html (comportamento SPA)
+# Redireciona a raiz para o index.html
+/ /index.html 200
+
+# Redireciona arquivos estáticos para a pasta assets
+/assets/* /assets/:splat 200
+
+# Redireciona todas as outras rotas para o index.html (comportamento SPA)
 /* /index.html 200 

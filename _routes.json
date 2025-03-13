@@ -9,12 +9,25 @@
     "/*.jpg",
     "/*.png",
     "/*.svg",
-    "/*.ico"
+    "/*.ico",
+    "/*.json",
+    "/*.txt"
   ],
   "routes": [
     {
+      "src": "/",
+      "dest": "/index.html",
+      "status": 200
+    },
+    {
+      "src": "^/assets/(.*)",
+      "dest": "/assets/$1",
+      "status": 200
+    },
+    {
       "src": ".*",
-      "dest": "/index.html"
+      "dest": "/index.html",
+      "status": 200
     }
   ]
 } 

@@ -19,10 +19,16 @@ NODE_ENV = "production"
 [env.preview]
 NODE_ENV = "development"
 
+# Configurações de rotas para garantir que o site funcione corretamente
+[[routes]]
+pattern = "/"
+content = "./index.html"
+content_type = "text/html;charset=UTF-8"
+
 # Rota para servir o index.html para todas as rotas não encontradas (SPA fallback)
 [[routes]]
 pattern = "/*"
-fallback_service = "index.html"
+fallback_service = "./index.html"
 
 # Configurações de tipos de conteúdo para garantir que os arquivos sejam servidos corretamente
 [[headers]]
@@ -39,6 +45,11 @@ value = "application/javascript"
 pattern = "*.webp"
 [headers.content_type]
 value = "image/webp"
+
+[[headers]]
+pattern = "*.html"
+[headers.content_type]
+value = "text/html;charset=UTF-8"
 
 # Specify any required compatibility flags
 [compatibility_flags]
