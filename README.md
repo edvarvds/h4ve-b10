@@ -1,51 +1,72 @@
-# Blog Havan - Versão Limpa
+# Campanha Havan - Abaixo-assinado
 
-Este é um projeto limpo do Blog Havan, contendo apenas os elementos visuais essenciais e funcionalidades básicas.
+Landing page para a campanha de abaixo-assinado pela elegibilidade de Bolsonaro com descontos exclusivos em produtos Havan.
 
 ## Estrutura do Projeto
 
 ```
 .
-├── assets/
-│   ├── css/
-│   │   ├── bootstrap.min.css
-│   │   ├── custom.css
-│   │   ├── fontawesome.css
-│   │   ├── slick.css
-│   │   └── style.css
-│   ├── js/
-│   │   ├── bootstrap.bundle.min.js
-│   │   ├── custom.js
-│   │   ├── jquery.min.js
-│   │   ├── main.js
-│   │   └── slick.min.js
-│   └── images/
-│       └── (várias imagens)
-├── index.html (original)
-├── new-index.html (versão limpa)
-└── README.md
+├── index.html                 # Página principal da campanha
+├── server.js                  # Servidor Express para servir a aplicação
+├── package.json               # Configuração do projeto Node.js
+├── Procfile                   # Configuração para deploy no Heroku
+└── Conheça os melhores tecidos leves pro verão - Blog Havan_files/  # Arquivos estáticos (CSS, JS, imagens)
 ```
 
-## Como Usar
+## Funcionalidades
 
-1. Para visualizar a versão limpa do site, abra o arquivo `new-index.html` em seu navegador.
-2. Para substituir a versão original pelo site limpo, renomeie `new-index.html` para `index.html` (fazendo backup do original primeiro, se desejar).
+- Vídeo de apresentação da campanha
+- Seção de objetivo e como funciona
+- Depoimentos de participantes
+- Formulário de assinatura
+- Layout responsivo para desktop e mobile
 
-## Funcionalidades Implementadas
+## Tecnologias Utilizadas
 
-- Layout responsivo usando Bootstrap
-- Formulário de newsletter com validação básica
-- Navegação mobile-friendly
-- Carrossel de imagens usando Slick
-- Efeitos de rolagem suave
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap
+- Font Awesome
+- Express.js (para servir a aplicação)
 
-## Correções Realizadas
+## Executando Localmente
 
-- Corrigido erro de sintaxe CSS nos botões de newsletter (margin: right:10px → margin-right:10px)
-- Simplificado o código HTML para melhor manutenção
-- Organizado os arquivos em uma estrutura de diretórios mais limpa
-- Adicionado CSS e JavaScript personalizados para melhorar a experiência do usuário
+1. Certifique-se de ter o Node.js instalado
+2. Clone este repositório
+3. Instale as dependências:
+   ```
+   npm install
+   ```
+4. Inicie o servidor:
+   ```
+   npm start
+   ```
+5. Acesse `http://localhost:3000` no seu navegador
+
+## Deploy no Heroku
+
+Para fazer o deploy desta aplicação no Heroku:
+
+1. Crie uma conta no [Heroku](https://heroku.com) se ainda não tiver
+2. Instale o [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+3. Faça login no Heroku CLI:
+   ```
+   heroku login
+   ```
+4. Crie um novo app no Heroku:
+   ```
+   heroku create nome-do-seu-app
+   ```
+5. Faça o deploy:
+   ```
+   git push heroku main
+   ```
+6. Abra a aplicação:
+   ```
+   heroku open
+   ```
 
 ## Observações
 
-Este projeto mantém apenas o visual e as funcionalidades básicas do site original, removendo scripts desnecessários, rastreadores e outros elementos que não são essenciais para a experiência do usuário. 
+Esta landing page foi criada para a campanha de abaixo-assinado pela elegibilidade de Bolsonaro, oferecendo descontos exclusivos em produtos Havan para os participantes. 
