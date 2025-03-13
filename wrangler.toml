@@ -1,0 +1,33 @@
+name = "havan-campaign"
+compatibility_date = "2023-12-01"
+
+# Configuration for Cloudflare Pages
+[site]
+bucket = "./"
+entry-point = "."
+
+# Build configuration
+[build]
+command = "npm run start"
+upload.format = "directory"
+output_directory = "public_html"
+
+# Environment variables
+[env.production]
+NODE_ENV = "production"
+
+[env.preview]
+NODE_ENV = "development"
+
+# Specify routes or redirects if needed
+# [[routes]]
+# pattern = "/api/*"
+# script = "server.js"
+
+# Add any necessary KV namespaces, Durable Objects, or other bindings
+# [kv_namespaces]
+# MY_KV = { binding = "MY_KV", id = "xxx" }
+
+# Specify any required compatibility flags
+[compatibility_flags]
+nodejs_compat = true 
